@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>HERBIX – Checkout</title>
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Razorpay SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">🌿 HERBIX</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li>
+      <li><a href="cart.html">Cart</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a href="order.html">My Orders</a></li>
+      <li><a href="track.html">Track Order</a></li>
+      <li class="auth-admin-link" style="display:none"><a href="admin.html">⚙️ Admin</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-icon" onclick="window.location.href='cart.html'">🛒<span class="cart-badge"></span></button>
+      <button class="btn btn-primary btn-sm open-login auth-login-btn">Login</button>
+      <div class="user-chip auth-user-area" style="display:none">👤 <span class="chip-name"></span>
+        <button class="btn btn-sm btn-outline logout-btn" style="padding:4px 12px;font-size:.75rem">Logout</button>
+      </div>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="tag" style="background:rgba(82,183,136,.2);color:var(--g4);border:1px solid rgba(82,183,136,.3)">Checkout</span>
+    <h1 class="sec-title">Complete Your Order</h1>
+    <p class="sec-sub">Fill in your delivery details and choose payment method.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Not logged in -->
+    <div id="notLoggedWarn" style="display:none;text-align:center;padding:60px 20px;background:var(--white);border-radius:var(--r-lg)">
+      <div style="font-size:3rem;margin-bottom:14px">🔒</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--g2);margin-bottom:10px">Login Required</h3>
+      <p style="color:var(--txt2);margin-bottom:20px">Please login to place your order.</p>
+      <button class="btn btn-primary open-login">Login / Sign Up</button>
+    </div>
+
+    <!-- Empty cart -->
+    <div id="emptyWarn" style="display:none;text-align:center;padding:60px 20px;background:var(--white);border-radius:var(--r-lg)">
+      <div style="font-size:3rem;margin-bottom:14px">🛒</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--g2);margin-bottom:10px">Cart is Empty</h3>
+      <a href="product.html" class="btn btn-gold">Shop Now →</a>
+    </div>
+
+    <!-- Order Grid -->
+    <div class="order-grid" id="orderGrid" style="display:none">
+
+      <!-- LEFT: form -->
+      <div>
+        <div class="alert" id="orderAlert" style="margin-bottom:18px"></div>
+
+        <!-- Delivery Address -->
+        <div class="order-card">
+          <h3>📦 Delivery Address</h3>
+          <div class="addr-grid">
+            <div class="form-group"><label class="form-label">Full Name <span class="req">*</span></label><input class="form-input" id="aName" placeholder="Recipient's name"/><div class="form-err-msg" id="eaName">Required</div></div>
+            <div class="form-group"><label class="form-label">Phone <span class="req">*</span></label><input class="form-input" id="aPhone" placeholder="10-digit mobile" maxlength="10"/><div class="form-err-msg" id="eaPhone">Valid 10-digit number needed</div></div>
+          </div>
+          <div class="form-group"><label class="form-label">Street / Flat / Area <span class="req">*</span></label><input class="form-input" id="aStreet" placeholder="House no., Street, Colony"/><div class="form-err-msg" id="eaStreet">Required</div></div>
+          <div class="addr-grid">
+            <div class="form-group"><label class="form-label">City <span class="req">*</span></label><input class="form-input" id="aCity" placeholder="City"/><div class="form-err-msg" id="eaCity">Required</div></div>
+            <div class="form-group"><label class="form-label">State <span class="req">*</span></label>
+              <select class="form-select" id="aState">
+                <option value="">Select State</option>
+                <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option><option>Delhi</option>
+                <option>Goa</option><option>Gujarat</option><option>Haryana</option><option>Karnataka</option>
+                <option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option>
+                <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+                <option>Tamil Nadu</option><option>Telangana</option><option>Uttar Pradesh</option>
+                <option>Uttarakhand</option><option>West Bengal</option>
+              </select>
+              <div class="form-err-msg" id="eaState">Required</div>
+            </div>
+          </div>
+          <div class="addr-grid">
+            <div class="form-group"><label class="form-label">Pincode <span class="req">*</span></label><input class="form-input" id="aPincode" placeholder="6-digit pincode" maxlength="6"/><div class="form-err-msg" id="eaPincode">Valid 6-digit pincode needed</div></div>
+            <div class="form-group"><label class="form-label">Landmark <small style="color:var(--txt3)">(optional)</small></label><input class="form-input" id="aLandmark" placeholder="Near temple, school..."/></div>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="order-card">
+          <h3>💳 Payment Method</h3>
+
+          <!-- UPI Option -->
+          <label class="payment-option" id="upiOption">
+            <input type="radio" name="pay" value="upi" id="payUpi"/>
+            <div class="pay-opt-content">
+              <div class="pay-opt-icons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/200px-UPI-Logo-vector.svg.png" alt="UPI" style="height:22px">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/200px-Paytm_Logo_%28standalone%29.svg.png" alt="Paytm" style="height:18px">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Google_Pay_Logo.svg/200px-Google_Pay_Logo.svg.png" alt="GPay" style="height:18px">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/PhonePe_Logo.svg/200px-PhonePe_Logo.svg.png" alt="PhonePe" style="height:18px">
+              </div>
+              <div>
+                <div style="font-weight:600;color:var(--g2)">UPI / Online Payment</div>
+                <div style="font-size:.78rem;color:var(--txt3)">Pay via GPay, PhonePe, Paytm, or any UPI app</div>
+              </div>
+              <span class="pay-badge pay-badge-recommended">Recommended</span>
+            </div>
+          </label>
+
+          <!-- COD Option -->
+          <label class="payment-option" id="codOption">
+            <input type="radio" name="pay" value="cod" id="payCod" checked/>
+            <div class="pay-opt-content">
+              <div class="pay-opt-icons">
+                <span style="font-size:1.6rem">💵</span>
+              </div>
+              <div>
+                <div style="font-weight:600;color:var(--g2)">Cash on Delivery</div>
+                <div style="font-size:.78rem;color:var(--txt3)">Pay when your order arrives at your door</div>
+              </div>
+              <span class="pay-badge pay-badge-free">No extra charge</span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Place Order Button -->
+        <button class="btn btn-gold" id="placeOrderBtn" style="width:100%;justify-content:center;padding:16px;font-size:1rem;margin-top:4px">
+          <span id="placeOrderTxt">Place Order 🌿</span>
+          <div class="spin" id="placeOrderSpin"></div>
+        </button>
+
+        <p style="text-align:center;font-size:.78rem;color:var(--txt3);margin-top:10px">
+          🔒 100% Secure · SSL Encrypted · Razorpay Powered
+        </p>
+      </div>
+
+      <!-- RIGHT: summary + past orders -->
+      <div class="sticky-summary">
+        <div class="order-card">
+          <h3>🧾 Order Summary</h3>
+          <div id="orderItemsPreview"></div>
+          <div style="margin-top:14px">
+            <div class="sum-row"><span>Subtotal</span><span id="oSubtotal">₹0</span></div>
+            <div class="sum-row"><span>Shipping</span><span id="oShipping">₹49</span></div>
+            <div class="sum-row"><span>Discount</span><span id="oDisc" style="color:var(--g3)">−₹0</span></div>
+            <div class="sum-row total"><span>Total</span><span id="oTotal">₹0</span></div>
+          </div>
+        </div>
+        <div style="background:var(--g5);border-radius:var(--r);padding:14px;margin-top:14px;font-size:.8rem;color:var(--g3);text-align:center">
+          🔒 Secure · 🌿 Organic Assured · ♻️ Eco-Packed
+        </div>
+        <!-- Past orders -->
+        <div class="order-card" style="margin-top:14px">
+          <h3>📋 My Past Orders</h3>
+          <div id="pastOrdersList" style="font-size:.84rem;color:var(--txt2)">Loading...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="footer-logo">🌿 HERBIX</div><p>Crafting nature's finest hair care since 2020.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li><li><a href="cart.html">Cart</a></li><li><a href="track.html">Track Order</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 HERBIX. All rights reserved.</span><span>Made with 🌿 &amp; ❤️</span></div>
+  </div>
+</footer>
+
+<!-- Login/Signup Modals -->
+<div id="loginModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Login to HERBIX</h3><button class="modal-close" onclick="closeModal('login')">✕</button></div><div class="modal-body"><div class="alert" id="loginAlert"></div><form id="loginForm"><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="loginEmail" type="email" required/></div><div class="form-group"><label class="form-label">Password</label><input class="form-input" id="loginPass" type="password" required/></div><button class="btn btn-primary" id="loginBtn" type="submit" style="width:100%;justify-content:center">Login <div class="spin" id="loginSpin"></div></button></form><div class="form-toggle">No account? <a id="goToSignup">Sign up</a></div></div></div></div>
+<div id="signupModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Create Account</h3><button class="modal-close" onclick="closeModal('signup')">✕</button></div><div class="modal-body"><div class="alert" id="signupAlert"></div><p style="font-size:.82rem;color:var(--txt3);margin-bottom:16px">⚠️ Needs admin approval before login.</p><form id="signupForm"><div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="signupName" type="text" required/></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="signupEmail" type="email" required/></div><div class="form-row"><div class="form-group"><label class="form-label">Password</label><input class="form-input" id="signupPass" type="password" required/></div><div class="form-group"><label class="form-label">Confirm</label><input class="form-input" id="signupConfirm" type="password" required/></div></div><button class="btn btn-primary" id="signupBtn" type="submit" style="width:100%;justify-content:center">Create Account <div class="spin" id="signupSpin"></div></button></form><div class="form-toggle">Have account? <a id="goToLogin">Login</a></div></div></div></div>
+<div class="toast" id="toast"><span class="toast-msg"></span></div>
+
+<script src="app.js"></script>
+<script>
+const sbadge = s => ({ Confirmed:"badge-green",Packed:"badge-orange",Shipped:"badge-blue","Out for Delivery":"badge-blue",Delivered:"badge-green",Cancelled:"badge-red" })[s]||"badge-orange";
+
+let orderTotal = 0;
+let orderCart  = [];
+let orderAddress = {};
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const user = getUser();
+  if (!user) { document.getElementById("notLoggedWarn").style.display="block"; return; }
+  const cart = getCart();
+  if (!cart.length) { document.getElementById("emptyWarn").style.display="block"; return; }
+
+  document.getElementById("orderGrid").style.display = "grid";
+  document.getElementById("aName").value = user.name || "";
+  orderCart = cart;
+
+  // Render items preview
+  document.getElementById("orderItemsPreview").innerHTML = cart.map(i => `
+    <div class="order-item-row">
+      <div class="oir-img"><img src="images/product.png" alt="${i.name}"/></div>
+      <div><div class="oir-name">${i.name}</div><div class="oir-qty">${i.size} · Qty ${i.qty}</div></div>
+      <div class="oir-price">₹${i.price*i.qty}</div>
+    </div>`).join("");
+
+  const sub  = cartTotal();
+  const ship = sub >= 499 ? 0 : 49;
+  const disc = sub >= 499 ? Math.round(sub*0.05) : 0;
+  orderTotal = sub + ship - disc;
+  document.getElementById("oSubtotal").textContent = "₹"+sub;
+  document.getElementById("oShipping").textContent = ship===0 ? "FREE 🎉" : "₹"+ship;
+  document.getElementById("oDisc").textContent = "−₹"+disc;
+  document.getElementById("oTotal").textContent  = "₹"+orderTotal;
+
+  // Payment option highlight
+  document.querySelectorAll('input[name="pay"]').forEach(r => {
+    r.addEventListener("change", () => {
+      document.querySelectorAll(".payment-option").forEach(o => o.classList.remove("selected"));
+      r.closest(".payment-option").classList.add("selected");
+    });
+  });
+  document.getElementById("payCod").closest(".payment-option").classList.add("selected");
+
+  loadPastOrders();
+  document.getElementById("placeOrderBtn").addEventListener("click", handlePlaceOrder);
+});
+
+function getAddress() {
+  return {
+    fullName: document.getElementById("aName").value.trim(),
+    phone:    document.getElementById("aPhone").value.trim(),
+    street:   document.getElementById("aStreet").value.trim(),
+    city:     document.getElementById("aCity").value.trim(),
+    state:    document.getElementById("aState").value.trim(),
+    pincode:  document.getElementById("aPincode").value.trim(),
+    landmark: document.getElementById("aLandmark").value.trim(),
+  };
+}
+
+function validateAddress() {
+  let valid = true;
+  const fe = (fieldId, errId, cond) => {
+    document.getElementById(fieldId)?.classList.toggle("err", !cond);
+    document.getElementById(errId)?.classList.toggle("on", !cond);
+    if (!cond) valid = false;
+  };
+  ["aName","aPhone","aStreet","aCity","aState","aPincode"].forEach(id => document.getElementById(id)?.classList.remove("err"));
+  ["eaName","eaPhone","eaStreet","eaCity","eaState","eaPincode"].forEach(id => document.getElementById(id)?.classList.remove("on"));
+  const addr = getAddress();
+  fe("aName",    "eaName",    !!addr.fullName);
+  fe("aPhone",   "eaPhone",   /^[6-9]\d{9}$/.test(addr.phone));
+  fe("aStreet",  "eaStreet",  !!addr.street);
+  fe("aCity",    "eaCity",    !!addr.city);
+  fe("aState",   "eaState",   !!addr.state);
+  fe("aPincode", "eaPincode", /^\d{6}$/.test(addr.pincode));
+  return valid;
+}
+
+async function handlePlaceOrder() {
+  if (!validateAddress()) { showToast("⚠️ Please fill all required fields."); return; }
+  const payMethod = document.querySelector('input[name="pay"]:checked')?.value || "cod";
+  orderAddress = getAddress();
+
+  if (payMethod === "upi") {
+    await handleUPIPayment();
+  } else {
+    await handleCODOrder();
+  }
+}
+
+// ── COD Order ─────────────────────────────────────────────────
+async function handleCODOrder() {
+  const btn  = document.getElementById("placeOrderBtn");
+  const txt  = document.getElementById("placeOrderTxt");
+  const spin = document.getElementById("placeOrderSpin");
+  const alertEl = document.getElementById("orderAlert");
+  btn.disabled=true; txt.textContent="Placing..."; spin.classList.add("on");
+
+  const { ok, data } = await apiFetch("/api/orders", {
+    method:"POST", body:JSON.stringify({ cart:orderCart, address:orderAddress, total:orderTotal })
+  });
+  btn.disabled=false; txt.textContent="Place Order 🌿"; spin.classList.remove("on");
+
+  if (ok) {
+    showOrderSuccess(data.orderId, "cod");
+    clearCart(); updateCartBadge(); loadPastOrders();
+  } else {
+    alertEl.className="alert alert-err on"; alertEl.innerHTML="❌ "+data.error;
+  }
+}
+
+// ── UPI Payment — simulated for Live Server mode ─────────────
+async function handleUPIPayment() {
+  const btn  = document.getElementById("placeOrderBtn");
+  const txt  = document.getElementById("placeOrderTxt");
+  const spin = document.getElementById("placeOrderSpin");
+  const alertEl = document.getElementById("orderAlert");
+
+  const confirmed = confirm(
+    "💳 UPI Payment Simulation\n\n" +
+    "Amount: ₹" + orderTotal + "\n\n" +
+    "In production this opens Razorpay checkout.\n" +
+    "Click OK to simulate a successful UPI payment."
+  );
+  if (!confirmed) { showToast("⚠️ Payment cancelled."); return; }
+
+  btn.disabled=true; txt.textContent="Processing..."; spin.classList.add("on");
+  const { ok, data } = await apiFetch("/api/payment/verify", {
+    method:"POST",
+    body: JSON.stringify({ cart:orderCart, address:orderAddress, total:orderTotal, paymentMethod:"upi" }),
+  });
+  btn.disabled=false; txt.textContent="Place Order 🌿"; spin.classList.remove("on");
+
+  if (ok) {
+    showOrderSuccess(data.orderId, "upi");
+    clearCart(); updateCartBadge(); loadPastOrders();
+  } else {
+    alertEl.className="alert alert-err on";
+    alertEl.innerHTML="❌ " + (data.error || "Payment failed.");
+  }
+}
+
+function showOrderSuccess(orderId, method) {
+  const alertEl = document.getElementById("orderAlert");
+  alertEl.className = "alert alert-ok on";
+  alertEl.innerHTML = `
+    ✅ <strong>Order ${orderId} placed!</strong>
+    ${method==="upi" ? "💳 Payment received via UPI." : "💵 Cash on Delivery."}
+    <a href="track.html?id=${orderId}" style="color:var(--g2);font-weight:700;margin-left:8px;text-decoration:underline">Track Order →</a>
+  `;
+  alertEl.scrollIntoView({ behavior:"smooth" });
+}
+
+async function loadPastOrders() {
+  const el = document.getElementById("pastOrdersList");
+  const { ok, data } = await apiFetch("/api/orders");
+  if (!ok||!data.length) { el.innerHTML="<p style='color:var(--txt3)'>No orders yet.</p>"; return; }
+  el.innerHTML = data.map(o=>`
+    <div class="past-order">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <b style="color:var(--g2)">${o.orderId}</b>
+        <span class="badge ${sbadge(o.status)}">${o.status}</span>
+      </div>
+      <div style="font-size:.76rem;color:var(--txt3)">${new Date(o.createdAt).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})} · ${(o.paymentMethod||"cod").toUpperCase()}</div>
+      <div style="margin-top:3px;color:var(--txt2)">${o.cart.map(i=>i.name+" ×"+i.qty).join(", ")}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+        <b style="color:var(--g2)">₹${o.total}</b>
+        <a href="track.html?id=${o.orderId}" style="color:var(--g3);font-size:.8rem;text-decoration:underline;font-weight:600">Track →</a>
+      </div>
+    </div>`).join("");
+}
+</script>
+</body>
+</html>

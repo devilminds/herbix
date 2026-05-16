@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>HERBIX – Organic Herbal Hair Gel</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══ NAVBAR ════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">🌿 HERBIX</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Product</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="order.html">My Orders</a></li>
+      <li><a href="track.html">Track Order</a></li>
+      <li class="auth-admin-link" style="display:none"><a href="admin.html">⚙️ Admin</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-icon" onclick="window.location.href='cart.html'" title="Cart">🛒<span class="cart-badge"></span></button>
+      <button class="btn btn-primary btn-sm open-login auth-login-btn">Login</button>
+      <div class="user-chip auth-user-area" style="display:none">
+        👤 <span class="chip-name"></span>
+        <button class="btn btn-sm btn-outline logout-btn" style="padding:4px 12px;font-size:.75rem">Logout</button>
+      </div>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-leaves">
+    <span class="hero-leaf">🌿</span><span class="hero-leaf">🍃</span>
+    <span class="hero-leaf">🌱</span><span class="hero-leaf">🌾</span>
+  </div>
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-kicker">100% Natural · Aloe Vera &amp; Rosemary Extracts</span>
+      <h1 class="hero-title">Nature's Hold,<br><em>Your Perfect</em><br>Hair Every Day</h1>
+      <p class="hero-desc">HERBIX Herbal Hair Gel blends certified organic aloe vera and rosemary extracts for strong, flexible hold — zero chemicals, zero compromise. All hair types. 100ml.</p>
+      <div class="hero-cta">
+        <button class="btn btn-gold" id="heroShopBtn">Shop Now →</button>
+        <button class="btn btn-white open-signup">Create Account</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">4.9★</div><div class="lbl">Rating</div></div>
+        <div class="hero-stat"><div class="num">12K+</div><div class="lbl">Customers</div></div>
+        <div class="hero-stat"><div class="num">0</div><div class="lbl">Chemicals</div></div>
+        <div class="hero-stat"><div class="num">100ml</div><div class="lbl">Per Jar</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="product-showcase">
+        <div class="glow-ring"></div>
+        <div class="prod-img-circle"><img src="images/product.png" alt="HERBIX Hair Gel"/></div>
+        <div class="float-badge top">🌱 Certified Organic<div class="fb-val">USDA</div></div>
+        <div class="float-badge bot">⭐ Customer Rating<div class="fb-val">4.9 / 5</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══════════════════════════════════════════════ -->
+<section class="section" id="product">
+  <div class="container">
+    <div class="sec-header">
+      <span class="tag">Why HERBIX</span>
+      <h2 class="sec-title">Pure Ingredients, Real Results</h2>
+      <p class="sec-sub">Every jar crafted with certified organic botanicals — no parabens, no sulphates, no artificial fragrance.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon">🌵</div><h3>Aloe Vera Core</h3><p>Deeply hydrates the hair shaft and scalp, providing lasting moisture without any greasiness or residue.</p></div>
+      <div class="feat-card"><div class="feat-icon">🌿</div><h3>Rosemary Extract</h3><p>Clinically studied to stimulate hair follicles, reduce thinning, and promote healthy new growth.</p></div>
+      <div class="feat-card"><div class="feat-icon">💪</div><h3>Flexible Hold</h3><p>Natural flaxseed polymers give strong hold that flexes with your hair — no crunch, no flaking.</p></div>
+      <div class="feat-card"><div class="feat-icon">🧴</div><h3>Scalp-Safe Formula</h3><p>Neem and tea tree maintain a balanced scalp pH. Great for sensitive scalps, kids, and daily use.</p></div>
+      <div class="feat-card"><div class="feat-icon">♻️</div><h3>Eco Packaging</h3><p>Glass jar with recycled labels. Reuse and refill. Our sustainability commitment goes beyond the formula.</p></div>
+      <div class="feat-card"><div class="feat-icon">🐰</div><h3>Vegan &amp; Cruelty-Free</h3><p>Never tested on animals. PETA certified vegan. Kind to every creature on the planet.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="product.html" class="btn btn-primary">View Full Product Details →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══════════════════════════════════════════ -->
+<section class="section" style="background:var(--g2)">
+  <div class="container">
+    <div class="sec-header">
+      <span class="tag" style="background:rgba(82,183,136,.2);color:var(--g4);border:1px solid rgba(82,183,136,.3)">Customer Love</span>
+      <h2 class="sec-title" style="color:#fff">What Our Community Says</h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.6);margin:10px auto 0;text-align:center">Real results from real people.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="stars">★★★★★</div><p>"My dandruff is completely gone after 3 weeks. First gel that feels GOOD on my scalp."</p><div class="reviewer"><div class="rev-av">👩</div><div><div class="rev-name">Priya Sharma</div><div class="rev-loc">Mumbai</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><p>"No white residue, no stiffness. My curls look defined and feel moisturised all day!"</p><div class="reviewer"><div class="rev-av">🧔</div><div><div class="rev-name">Arjun Menon</div><div class="rev-loc">Bengaluru</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★☆</div><p>"Subtle natural fragrance, my kids love it too. Works great on fine hair without weighing it down."</p><div class="reviewer"><div class="rev-av">👩‍👦</div><div><div class="rev-name">Kavitha Nair</div><div class="rev-loc">Chennai</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="footer-logo">🌿 HERBIX</div><p>Crafting nature's finest hair care since 2020. Organic, ethical, effective — from our garden to your hair.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li><li><a href="cart.html">Cart</a></li><li><a href="contact.html">Contact</a></li><li><a href="order.html">My Orders</a></li>
+      <li><a href="track.html">Track Order</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Shipping Policy</a></li><li><a href="#">Refund Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 HERBIX. All rights reserved.</span><span>Made with 🌿 &amp; ❤️</span></div>
+  </div>
+</footer>
+
+<!-- Modals + Toast -->
+<div id="loginModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Login to HERBIX</h3><button class="modal-close" onclick="closeModal('login')">✕</button></div><div class="modal-body"><div class="alert" id="loginAlert"></div><form id="loginForm"><div class="form-group"><label class="form-label">Email <span class="req">*</span></label><input class="form-input" id="loginEmail" type="email" placeholder="you@example.com" required/></div><div class="form-group"><label class="form-label">Password <span class="req">*</span></label><input class="form-input" id="loginPass" type="password" placeholder="••••••••" required/></div><button class="btn btn-primary" id="loginBtn" type="submit" style="width:100%;justify-content:center">Login <div class="spin" id="loginSpin"></div></button></form><div class="form-toggle">No account? <a id="goToSignup">Sign up</a></div></div></div></div>
+<div id="signupModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Create Account</h3><button class="modal-close" onclick="closeModal('signup')">✕</button></div><div class="modal-body"><div class="alert" id="signupAlert"></div><p style="font-size:.82rem;color:var(--txt3);margin-bottom:16px">⚠️ Your account needs admin approval before you can log in.</p><form id="signupForm"><div class="form-group"><label class="form-label">Full Name <span class="req">*</span></label><input class="form-input" id="signupName" type="text" placeholder="Your full name" required/></div><div class="form-group"><label class="form-label">Email <span class="req">*</span></label><input class="form-input" id="signupEmail" type="email" placeholder="you@example.com" required/></div><div class="form-row"><div class="form-group"><label class="form-label">Password <span class="req">*</span></label><input class="form-input" id="signupPass" type="password" placeholder="Min 6 chars" required/></div><div class="form-group"><label class="form-label">Confirm <span class="req">*</span></label><input class="form-input" id="signupConfirm" type="password" placeholder="Repeat password" required/></div></div><button class="btn btn-primary" id="signupBtn" type="submit" style="width:100%;justify-content:center">Create Account <div class="spin" id="signupSpin"></div></button></form><div class="form-toggle">Have an account? <a id="goToLogin">Login</a></div></div></div></div>
+<div class="toast" id="toast"><span class="toast-msg"></span></div>
+<script src="app.js"></script>
+</body>
+</html>

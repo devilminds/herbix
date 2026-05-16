@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>HERBIX – Product</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">🌿 HERBIX</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li>
+      <li><a href="cart.html">Cart</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a href="order.html">My Orders</a></li>
+      <li><a href="track.html">Track Order</a></li>
+      <li class="auth-admin-link" style="display:none"><a href="admin.html">⚙️ Admin</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-icon" onclick="window.location.href='cart.html'" title="Cart">🛒<span class="cart-badge"></span></button>
+      <button class="btn btn-primary btn-sm open-login auth-login-btn">Login</button>
+      <div class="user-chip auth-user-area" style="display:none">👤 <span class="chip-name"></span><button class="btn btn-sm btn-outline logout-btn" style="padding:4px 12px;font-size:.75rem">Logout</button></div>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="tag" style="background:rgba(82,183,136,.2);color:var(--g4);border:1px solid rgba(82,183,136,.3)">Our Signature Formula</span>
+    <h1 class="sec-title">HERBIX Herbal Hair Gel</h1>
+    <p class="sec-sub">100ml · Organic · No Chemicals</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="prod-layout">
+      <!-- Image -->
+      <div>
+        <div class="prod-img-main"><img src="images/product.png" alt="HERBIX Herbal Hair Gel"/></div>
+        <div class="prod-badges">
+          <span class="prod-badge">🌱 Organic</span>
+          <span class="prod-badge">🐰 Cruelty-Free</span>
+        </div>
+      </div>
+      <!-- Info -->
+      <div>
+        <div class="prod-brand">HERBIX Naturals</div>
+        <h2 class="prod-name">Herbal Hair Gel<br>with Aloe Vera &amp; Rosemary</h2>
+        <div class="prod-rating"><span class="stars">★★★★★</span> 4.9 · 1,412 reviews</div>
+        <div class="prod-price" id="prodPriceBox">₹200 <span class="orig">₹299</span><span class="disc">33% OFF</span></div>
+        <p style="font-size:.78rem;color:var(--txt3);margin-bottom:4px">Incl. all taxes · Free delivery above ₹499</p>
+        <p class="prod-desc">Our signature herbal gel blends 8 certified organic botanicals to deliver strong, flexible hold without any alcohol or harsh chemicals. 100% Natural · All Hair Types · 100ml.</p>
+        <!-- Qty -->
+        <div class="qty-label">Quantity</div>
+        <div class="qty-wrap">
+          <button class="qty-btn" id="qtyMinus">−</button>
+          <input class="qty-input" id="qtyInput" type="number" value="1" min="1" max="10" readonly/>
+          <button class="qty-btn" id="qtyPlus">+</button>
+        </div>
+        <div class="add-row">
+          <button class="btn btn-primary" id="addCartBtn">🛒 Add to Cart</button>
+          <button class="btn btn-gold" id="buyNowBtn">Buy Now →</button>
+        </div>
+        <div style="border-top:1px solid var(--cream2);padding-top:18px">
+          <div class="meta-row"><span>🚚</span><span class="meta-lbl">Delivery</span><span class="meta-val">2–4 business days · Free above ₹499</span></div>
+          <div class="meta-row"><span>↩️</span><span class="meta-lbl">Returns</span><span class="meta-val">7-day easy return policy</span></div>
+          <div class="meta-row"><span>✅</span><span class="meta-lbl">Certified</span><span class="meta-val">USDA Organic · ECOCERT · Cruelty-Free</span></div>
+          <div class="meta-row"><span>⏳</span><span class="meta-lbl">Shelf Life</span><span class="meta-val">18 months from manufacturing date</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ingredient Tabs -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="tabs-wrap">
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="ing">Key Ingredients</button>
+        <button class="tab-btn" data-tab="ben">Benefits</button>
+        <button class="tab-btn" data-tab="how">How to Use</button>
+      </div>
+      <div class="tab-panel active" id="tab-ing">
+        <div class="ing-grid">
+          <div class="ing-item"><span class="ing-icon">🌵</span><div><div class="ing-name">Aloe Vera</div><div class="ing-ben">Hydration &amp; hold</div></div></div>
+          <div class="ing-item"><span class="ing-icon">🌿</span><div><div class="ing-name">Rosemary Extract</div><div class="ing-ben">Hair growth &amp; shine</div></div></div>
+          <div class="ing-item"><span class="ing-icon">🫚</span><div><div class="ing-name">Flaxseed Polymer</div><div class="ing-ben">Natural hold agent</div></div></div>
+          <div class="ing-item"><span class="ing-icon">🌸</span><div><div class="ing-name">Hibiscus</div><div class="ing-ben">Strength &amp; thickness</div></div></div>
+          <div class="ing-item"><span class="ing-icon">🍃</span><div><div class="ing-name">Neem</div><div class="ing-ben">Anti-dandruff &amp; scalp care</div></div></div>
+          <div class="ing-item"><span class="ing-icon">🫧</span><div><div class="ing-name">Tea Tree Oil</div><div class="ing-ben">Antimicrobial</div></div></div>
+          <div class="ing-item"><span class="ing-icon">🥥</span><div><div class="ing-name">Coconut Milk</div><div class="ing-ben">Softness &amp; shine</div></div></div>
+          <div class="ing-item"><span class="ing-icon">🌾</span><div><div class="ing-name">Amla Extract</div><div class="ing-ben">Vitamin C &amp; anti-grey</div></div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab-ben">
+        <div class="ben-grid">
+          <div class="ben-item"><h4>💧 All-Day Moisture</h4><p>Aloe vera &amp; coconut milk keep hair hydrated for 24+ hours without greasy residue.</p></div>
+          <div class="ben-item"><h4>💪 Flexible Hold</h4><p>Strong enough to tame frizz, flexible enough to let natural movement through. No crunch.</p></div>
+          <div class="ben-item"><h4>🌱 Stimulates Growth</h4><p>Rosemary and amla are clinically studied to reduce hair fall and promote new growth.</p></div>
+          <div class="ben-item"><h4>🧴 Scalp Health</h4><p>Neem and tea tree maintain a healthy scalp pH, reducing dandruff and itchiness.</p></div>
+          <div class="ben-item"><h4>✨ Natural Shine</h4><p>Hibiscus gives hair a glossy, healthy sheen without synthetic silicone coating.</p></div>
+          <div class="ben-item"><h4>🛡️ UV &amp; Heat Protection</h4><p>Antioxidants from amla and rosemary form a protective barrier against stressors.</p></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab-how">
+        <div class="how-steps">
+          <div class="how-step"><div class="step-num">1</div><div class="step-text"><h4>Wash &amp; Condition</h4><p>Start with clean, towel-dried damp hair — not dripping wet.</p></div></div>
+          <div class="how-step"><div class="step-num">2</div><div class="step-text"><h4>Scoop &amp; Warm</h4><p>Take a pea-sized amount and warm between palms to activate the gel.</p></div></div>
+          <div class="how-step"><div class="step-num">3</div><div class="step-text"><h4>Apply Evenly</h4><p>Work roots to tips. Scrunch for curls, smooth for sleek styles.</p></div></div>
+          <div class="how-step"><div class="step-num">4</div><div class="step-text"><h4>Style &amp; Enjoy</h4><p>Air-dry or diffuse. No reapplication needed — hold lasts all day.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="footer-logo">🌿 HERBIX</div><p>Crafting nature's finest hair care since 2020.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li><li><a href="cart.html">Cart</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li><li><a href="#">Refund Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 HERBIX. All rights reserved.</span><span>Made with 🌿 &amp; ❤️</span></div>
+  </div>
+</footer>
+
+<div id="loginModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Login to HERBIX</h3><button class="modal-close" onclick="closeModal('login')">✕</button></div><div class="modal-body"><div class="alert" id="loginAlert"></div><form id="loginForm"><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="loginEmail" type="email" required/></div><div class="form-group"><label class="form-label">Password</label><input class="form-input" id="loginPass" type="password" required/></div><button class="btn btn-primary" id="loginBtn" type="submit" style="width:100%;justify-content:center">Login <div class="spin" id="loginSpin"></div></button></form><div class="form-toggle">No account? <a id="goToSignup">Sign up</a></div></div></div></div>
+<div id="signupModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Create Account</h3><button class="modal-close" onclick="closeModal('signup')">✕</button></div><div class="modal-body"><div class="alert" id="signupAlert"></div><p style="font-size:.82rem;color:var(--txt3);margin-bottom:16px">⚠️ Needs admin approval before login.</p><form id="signupForm"><div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="signupName" type="text" required/></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="signupEmail" type="email" required/></div><div class="form-row"><div class="form-group"><label class="form-label">Password</label><input class="form-input" id="signupPass" type="password" required/></div><div class="form-group"><label class="form-label">Confirm</label><input class="form-input" id="signupConfirm" type="password" required/></div></div><button class="btn btn-primary" id="signupBtn" type="submit" style="width:100%;justify-content:center">Create Account <div class="spin" id="signupSpin"></div></button></form><div class="form-toggle">Have account? <a id="goToLogin">Login</a></div></div></div></div>
+<div class="toast" id="toast"><span class="toast-msg"></span></div>
+<script src="app.js"></script>
+</body>
+</html>

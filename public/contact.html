@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>HERBIX – Contact</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">🌿 HERBIX</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li>
+      <li><a href="cart.html">Cart</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a href="order.html">My Orders</a></li>
+      <li><a href="track.html">Track Order</a></li>
+      <li class="auth-admin-link" style="display:none"><a href="admin.html">⚙️ Admin</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-icon" onclick="window.location.href='cart.html'" title="Cart">🛒<span class="cart-badge"></span></button>
+      <button class="btn btn-primary btn-sm open-login auth-login-btn">Login</button>
+      <div class="user-chip auth-user-area" style="display:none">👤 <span class="chip-name"></span><button class="btn btn-sm btn-outline logout-btn" style="padding:4px 12px;font-size:.75rem">Logout</button></div>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="tag" style="background:rgba(82,183,136,.2);color:var(--g4);border:1px solid rgba(82,183,136,.3)">Get in Touch</span>
+    <h1 class="sec-title">We'd Love to Hear From You</h1>
+    <p class="sec-sub">Questions, feedback, or just want to say hi? We read every message.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+      <!-- Info -->
+      <div>
+        <span class="tag">Contact Details</span>
+        <h2 class="sec-title">Let's Start a Conversation</h2>
+        <p class="sec-sub">Our friendly team is here Monday–Saturday, 9am–6pm IST. We reply within 24 hours.</p>
+        <div class="contact-cards">
+          <div class="contact-card"><div class="cc-icon">📧</div><div><div class="cc-label">Email</div><div class="cc-val">hello@herbix.in</div></div></div>
+          <div class="contact-card"><div class="cc-icon">📞</div><div><div class="cc-label">Phone</div><div class="cc-val">+91 98765 43210</div></div></div>
+          <div class="contact-card"><div class="cc-icon">📍</div><div><div class="cc-label">Address</div><div class="cc-val">42 Herb Garden Lane, Bengaluru, India 560001</div></div></div>
+          <div class="contact-card"><div class="cc-icon">🕐</div><div><div class="cc-label">Working Hours</div><div class="cc-val">Mon–Sat · 9:00 AM – 6:00 PM IST</div></div></div>
+        </div>
+        <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="#" class="btn btn-outline btn-sm">📸 Instagram</a>
+          <a href="#" class="btn btn-outline btn-sm">👍 Facebook</a>
+          <a href="#" class="btn btn-outline btn-sm">🐦 Twitter</a>
+        </div>
+      </div>
+      <!-- Form -->
+      <div class="contact-form-box">
+        <h3>Send Us a Message</h3>
+        <div class="alert" id="formSuccess"></div>
+        <div class="alert" id="formError"></div>
+        <div class="form-group"><label class="form-label">Full Name <span class="req">*</span></label><input class="form-input" id="cName" type="text" placeholder="Your name"/><div class="form-err-msg" id="errCName">Please enter your name.</div></div>
+        <div class="form-group"><label class="form-label">Email Address <span class="req">*</span></label><input class="form-input" id="cEmail" type="email" placeholder="you@email.com"/><div class="form-err-msg" id="errCEmail">Please enter a valid email.</div></div>
+        <div class="form-group"><label class="form-label">Message <span class="req">*</span></label><textarea class="form-textarea" id="cMessage" placeholder="Tell us how we can help..."></textarea><div class="form-err-msg" id="errCMsg">Message must be at least 10 characters.</div></div>
+        <button class="btn btn-primary" id="contactSubmitBtn" style="width:100%;justify-content:center">Send Message 🌿 <div class="spin" id="contactSpin"></div></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="footer-logo">🌿 HERBIX</div><p>Crafting nature's finest hair care since 2020.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li><li><a href="cart.html">Cart</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 HERBIX. All rights reserved.</span><span>Made with 🌿 &amp; ❤️</span></div>
+  </div>
+</footer>
+
+<div id="loginModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Login to HERBIX</h3><button class="modal-close" onclick="closeModal('login')">✕</button></div><div class="modal-body"><div class="alert" id="loginAlert"></div><form id="loginForm"><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="loginEmail" type="email" required/></div><div class="form-group"><label class="form-label">Password</label><input class="form-input" id="loginPass" type="password" required/></div><button class="btn btn-primary" id="loginBtn" type="submit" style="width:100%;justify-content:center">Login <div class="spin" id="loginSpin"></div></button></form><div class="form-toggle">No account? <a id="goToSignup">Sign up</a></div></div></div></div>
+<div id="signupModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Create Account</h3><button class="modal-close" onclick="closeModal('signup')">✕</button></div><div class="modal-body"><div class="alert" id="signupAlert"></div><p style="font-size:.82rem;color:var(--txt3);margin-bottom:16px">⚠️ Needs admin approval before login.</p><form id="signupForm"><div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="signupName" type="text" required/></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="signupEmail" type="email" required/></div><div class="form-row"><div class="form-group"><label class="form-label">Password</label><input class="form-input" id="signupPass" type="password" required/></div><div class="form-group"><label class="form-label">Confirm</label><input class="form-input" id="signupConfirm" type="password" required/></div></div><button class="btn btn-primary" id="signupBtn" type="submit" style="width:100%;justify-content:center">Create Account <div class="spin" id="signupSpin"></div></button></form><div class="form-toggle">Have account? <a id="goToLogin">Login</a></div></div></div></div>
+<div class="toast" id="toast"><span class="toast-msg"></span></div>
+
+<script src="app.js"></script>
+<script>
+document.getElementById("contactSubmitBtn").addEventListener("click", async () => {
+  const name    = document.getElementById("cName").value.trim();
+  const email   = document.getElementById("cEmail").value.trim();
+  const message = document.getElementById("cMessage").value.trim();
+  const successEl = document.getElementById("formSuccess");
+  const errorEl   = document.getElementById("formError");
+  successEl.className = "alert"; errorEl.className = "alert";
+  ["cName","cEmail","cMessage"].forEach(id => document.getElementById(id)?.classList.remove("err"));
+  ["errCName","errCEmail","errCMsg"].forEach(id => document.getElementById(id)?.classList.remove("on"));
+  let valid = true;
+  if (!name)                        { document.getElementById("cName").classList.add("err");    document.getElementById("errCName").classList.add("on");  valid=false; }
+  if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById("cEmail").classList.add("err"); document.getElementById("errCEmail").classList.add("on"); valid=false; }
+  if (!message||message.length<10) { document.getElementById("cMessage").classList.add("err"); document.getElementById("errCMsg").classList.add("on");   valid=false; }
+  if (!valid) return;
+  const btn  = document.getElementById("contactSubmitBtn");
+  const spin = document.getElementById("contactSpin");
+  btn.disabled=true; spin.classList.add("on");
+  const { ok, data } = await apiFetch("/api/contact", { method:"POST", body:JSON.stringify({ name, email, message }) });
+  btn.disabled=false; spin.classList.remove("on");
+  if (ok) {
+    successEl.className="alert alert-ok on"; successEl.innerHTML="✅ " + data.message;
+    document.getElementById("cName").value=""; document.getElementById("cEmail").value=""; document.getElementById("cMessage").value="";
+  } else {
+    errorEl.className="alert alert-err on"; errorEl.innerHTML="❌ " + data.error;
+  }
+});
+</script>
+</body>
+</html>

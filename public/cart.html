@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>HERBIX – Cart</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">🌿 HERBIX</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li>
+      <li><a href="cart.html">Cart</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a href="order.html">My Orders</a></li>
+      <li><a href="track.html">Track Order</a></li>
+      <li class="auth-admin-link" style="display:none"><a href="admin.html">⚙️ Admin</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-icon" onclick="window.location.href='cart.html'" title="Cart">🛒<span class="cart-badge"></span></button>
+      <button class="btn btn-primary btn-sm open-login auth-login-btn">Login</button>
+      <div class="user-chip auth-user-area" style="display:none">👤 <span class="chip-name"></span><button class="btn btn-sm btn-outline logout-btn" style="padding:4px 12px;font-size:.75rem">Logout</button></div>
+    </div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="tag" style="background:rgba(82,183,136,.2);color:var(--g4);border:1px solid rgba(82,183,136,.3)">Your Selections</span>
+    <h1 class="sec-title">Shopping Cart</h1>
+    <p class="sec-sub">Review your items and proceed to checkout</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cart-layout" id="cartLayout">
+      <!-- Items col -->
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+          <h2 class="sec-title" style="font-size:1.6rem">Your Items</h2>
+          <span style="color:var(--txt3);font-size:.88rem" id="cartCountLabel"></span>
+        </div>
+
+        <!-- Empty -->
+        <div class="cart-empty-box" id="emptyBox" style="display:none">
+          <div class="empty-icon">🛒</div>
+          <h3 style="font-family:'Playfair Display',serif;color:var(--g2);margin-bottom:10px">Your cart is empty</h3>
+          <p style="color:var(--txt2);margin-bottom:20px">Explore our organic hair gel!</p>
+          <a href="product.html" class="btn btn-primary">Shop Now →</a>
+        </div>
+
+        <!-- Items list -->
+        <div class="cart-items" id="cartItemsList"></div>
+
+        <!-- Clear -->
+        <div id="clearWrap" style="margin-top:18px;display:none">
+          <button class="btn btn-sm btn-outline" id="clearBtn" style="color:var(--red);border-color:var(--red)">🗑️ Clear All Items</button>
+        </div>
+      </div>
+
+      <!-- Summary col -->
+      <div class="cart-summary" id="cartSummaryBox" style="display:none">
+        <h3>Order Summary</h3>
+        <div class="sum-row"><span>Subtotal</span><span id="sumSubtotal">₹0</span></div>
+        <div class="sum-row"><span>Shipping</span><span id="sumShipping">₹49</span></div>
+        <div class="sum-row"><span>Discount (5%)</span><span id="sumDisc" style="color:var(--g3)">−₹0</span></div>
+        <div class="sum-row total"><span>Total</span><span id="sumTotal">₹0</span></div>
+        <button class="btn btn-gold" id="checkoutBtn" style="width:100%;margin-top:14px">Proceed to Checkout →</button>
+        <div class="sum-note"><span>🔒 Secure</span><span>·</span><span>🌿 Organic</span><span>·</span><span>♻️ Eco-Packed</span></div>
+        <a href="product.html" class="btn btn-outline" style="width:100%;margin-top:12px;justify-content:center">← Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="footer-logo">🌿 HERBIX</div><p>Crafting nature's finest hair care since 2020.</p></div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="product.html">Product</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 HERBIX. All rights reserved.</span><span>Made with 🌿 &amp; ❤️</span></div>
+  </div>
+</footer>
+
+<div id="loginModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Login to HERBIX</h3><button class="modal-close" onclick="closeModal('login')">✕</button></div><div class="modal-body"><div class="alert" id="loginAlert"></div><form id="loginForm"><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="loginEmail" type="email" required/></div><div class="form-group"><label class="form-label">Password</label><input class="form-input" id="loginPass" type="password" required/></div><button class="btn btn-primary" id="loginBtn" type="submit" style="width:100%;justify-content:center">Login <div class="spin" id="loginSpin"></div></button></form><div class="form-toggle">No account? <a id="goToSignup">Sign up</a></div></div></div></div>
+<div id="signupModal" class="modal-bg"><div class="modal"><div class="modal-head"><h3>🌿 Create Account</h3><button class="modal-close" onclick="closeModal('signup')">✕</button></div><div class="modal-body"><div class="alert" id="signupAlert"></div><p style="font-size:.82rem;color:var(--txt3);margin-bottom:16px">⚠️ Needs admin approval before login.</p><form id="signupForm"><div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="signupName" type="text" required/></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" id="signupEmail" type="email" required/></div><div class="form-row"><div class="form-group"><label class="form-label">Password</label><input class="form-input" id="signupPass" type="password" required/></div><div class="form-group"><label class="form-label">Confirm</label><input class="form-input" id="signupConfirm" type="password" required/></div></div><button class="btn btn-primary" id="signupBtn" type="submit" style="width:100%;justify-content:center">Create Account <div class="spin" id="signupSpin"></div></button></form><div class="form-toggle">Have account? <a id="goToLogin">Login</a></div></div></div></div>
+<div class="toast" id="toast"><span class="toast-msg"></span></div>
+
+<script src="app.js"></script>
+<script>
+function renderCartPage() {
+  const cart = getCart();
+  const emptyBox   = document.getElementById("emptyBox");
+  const itemsList  = document.getElementById("cartItemsList");
+  const summaryBox = document.getElementById("cartSummaryBox");
+  const clearWrap  = document.getElementById("clearWrap");
+  const countLabel = document.getElementById("cartCountLabel");
+
+  if (!cart.length) {
+    emptyBox.style.display = "block"; summaryBox.style.display = "none"; clearWrap.style.display = "none";
+    itemsList.innerHTML = ""; countLabel.textContent = ""; return;
+  }
+  emptyBox.style.display = "none"; summaryBox.style.display = "block"; clearWrap.style.display = "block";
+  countLabel.textContent = cart.length + " item" + (cart.length > 1 ? "s" : "");
+
+  itemsList.innerHTML = cart.map(i => `
+    <div class="cart-item">
+      <div class="ci-img"><img src="images/product.png" alt="${i.name}"/></div>
+      <div>
+        <div class="ci-name">${i.name}</div>
+        <div class="ci-price">₹${i.price} · ${i.size}</div>
+      </div>
+      <div class="ci-controls">
+        <div class="ci-total">₹${i.price * i.qty}</div>
+        <div class="ci-qty">
+          <button class="ciq-btn ciq-minus" onclick="updateCartQty('${i.id}',${i.qty-1})">−</button>
+          <span>${i.qty}</span>
+          <button class="ciq-btn ciq-plus" onclick="updateCartQty('${i.id}',${i.qty+1})">+</button>
+        </div>
+        <button class="ci-del" onclick="updateCartQty('${i.id}',0)">Remove</button>
+      </div>
+    </div>`).join("");
+
+  const sub  = cartTotal();
+  const ship = sub >= 499 ? 0 : 49;
+  const disc = sub >= 499 ? Math.round(sub * 0.05) : 0;
+  document.getElementById("sumSubtotal").textContent = "₹" + sub;
+  document.getElementById("sumShipping").textContent = ship === 0 ? "FREE 🎉" : "₹" + ship;
+  document.getElementById("sumDisc").textContent = "−₹" + disc;
+  document.getElementById("sumTotal").textContent = "₹" + (sub + ship - disc);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderCartPage();
+
+  document.getElementById("clearBtn")?.addEventListener("click", () => {
+    if (confirm("Remove all items?")) { clearCart(); renderCartPage(); }
+  });
+
+  document.getElementById("checkoutBtn")?.addEventListener("click", () => {
+    if (!isLoggedIn()) { openModal("login"); showToast("⚠️ Please login to checkout."); return; }
+    window.location.href = "order.html";
+  });
+});
+</script>
+</body>
+</html>
